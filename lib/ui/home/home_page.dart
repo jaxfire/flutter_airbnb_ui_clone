@@ -32,89 +32,13 @@ class MyHomePage extends StatelessWidget {
                         SizedBox(
                           height: 16.0,
                         ),
-                        Row(
-                          children: [
-                            FaIcon(
-                              FontAwesomeIcons.solidStar,
-                              color: Colors.red,
-                              size: 14,
-                            ),
-                            SizedBox(
-                              width: 6.0,
-                            ),
-                            Text(
-                              '4.97 (74)',
-                              style: TextStyle(
-                                fontSize: 14.0,
-                                color: Colors.black87,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 6.0,
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: FaIcon(
-                                FontAwesomeIcons.solidCircle,
-                                color: Colors.red,
-                                size: 2,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 6.0,
-                            ),
-                            FaIcon(
-                              FontAwesomeIcons.medal,
-                              color: Colors.red,
-                              size: 14,
-                            ),
-                            SizedBox(
-                              width: 6.0,
-                            ),
-                            Text(
-                              'Superhost',
-                              style: TextStyle(
-                                fontSize: 14.0,
-                                color: Colors.black87,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 6.0,
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: FaIcon(
-                                FontAwesomeIcons.solidCircle,
-                                color: Colors.red,
-                                size: 2,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 6.0,
-                            ),
-                            Flexible(
-                              child: Text(
-                                'Kent, England, United Kingdom',
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ],
+                        MetaInfoRow(
+                          avgScore: '4.95',
+                          numOfReviews: '106',
+                          isSuperHost: true,
+                          vagueDisplayAddress: 'Kent, England, United Kingdom',
                         ),
-                        SizedBox(
-                          height: 24.0,
-                        ),
-                        Container(
-                          height: 2.0,
-                          width: double.infinity,
-                          color: Colors.black12,
-                        ),
-                        SizedBox(
-                          height: 24.0,
-                        ),
+                        DividerRow(),
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
@@ -137,10 +61,6 @@ class MyHomePage extends StatelessWidget {
                                     fontSize: 16.0),
                               ),
                             ),
-                            // Align(
-                            //   alignment: Alignment.bottomRight,
-                            //   child: Text('test'),
-                            // )
                           ],
                         ),
                       ],
@@ -152,6 +72,128 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class MetaInfoRow extends StatelessWidget {
+  final String averageScore;
+  final String numOfReviews;
+  final bool isSuperHost;
+  final String vagueDisplayAddress;
+  MetaInfoRow(
+      {@required String avgScore,
+      @required String numOfReviews,
+      @required isSuperHost,
+      @required vagueDisplayAddress})
+      : this.averageScore = avgScore,
+        this.numOfReviews = numOfReviews,
+        this.isSuperHost = isSuperHost,
+        this.vagueDisplayAddress = vagueDisplayAddress;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        FaIcon(
+          FontAwesomeIcons.solidStar,
+          color: Colors.red,
+          size: 14,
+        ),
+        SizedBox(
+          width: 6.0,
+        ),
+        Text(
+          '$averageScore ($numOfReviews)',
+          style: TextStyle(
+            fontSize: 14.0,
+            color: Colors.black87,
+          ),
+        ),
+        SizedBox(
+          width: 6.0,
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: FaIcon(
+            FontAwesomeIcons.solidCircle,
+            color: Colors.red,
+            size: 2,
+          ),
+        ),
+        SizedBox(
+          width: 6.0,
+        ),
+        FaIcon(
+          FontAwesomeIcons.medal,
+          color: Colors.red,
+          size: 14,
+        ),
+        SizedBox(
+          width: 6.0,
+        ),
+        Text(
+          'Superhost',
+          style: TextStyle(
+            fontSize: 14.0,
+            color: Colors.black87,
+          ),
+        ),
+        SizedBox(
+          width: 6.0,
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: FaIcon(
+            FontAwesomeIcons.solidCircle,
+            color: Colors.red,
+            size: 2,
+          ),
+        ),
+        SizedBox(
+          width: 6.0,
+        ),
+        Flexible(
+          child: RawMaterialButton(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: () {
+              // TODO
+              print('Address clicked');
+            },
+            child: Text(
+              vagueDisplayAddress ?? '',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Colors.black,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class DividerRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 24.0,
+        ),
+        Container(
+          height: 2.0,
+          width: double.infinity,
+          color: Colors.black12,
+        ),
+        SizedBox(
+          height: 24.0,
+        ),
+      ],
     );
   }
 }
@@ -183,41 +225,23 @@ class _ImageHeaderState extends State<ImageHeader> {
               });
             },
             children: [
-              Image.asset(
-                'assets/images/airbnb_outside_1.jpg',
-                height: 100,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
+              HeaderPagerImage(
+                url: 'assets/images/airbnb_1.jpg',
               ),
-              Image.asset(
-                'assets/images/airbnb_living_room_1.jpg',
-                height: 100,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
+              HeaderPagerImage(
+                url: 'assets/images/airbnb_2.jpg',
               ),
-              Image.asset(
-                'assets/images/airbnb_living_room_2.jpg',
-                height: 100,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
+              HeaderPagerImage(
+                url: 'assets/images/airbnb_3.jpg',
               ),
-              Image.asset(
-                'assets/images/airbnb_kitchen_1.jpg',
-                height: 100,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
+              HeaderPagerImage(
+                url: 'assets/images/airbnb_5.jpg',
               ),
-              Image.asset(
-                'assets/images/airbnb_bedroom_1.jpg',
-                height: 100,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
+              HeaderPagerImage(
+                url: 'assets/images/airbnb_4.jpg',
               ),
-              Image.asset(
-                'assets/images/airbnb_garden_1.jpg',
-                height: 100,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
+              HeaderPagerImage(
+                url: 'assets/images/airbnb_6.jpg',
               ),
             ],
           ),
@@ -275,6 +299,21 @@ class _ImageHeaderState extends State<ImageHeader> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class HeaderPagerImage extends StatelessWidget {
+  final String url;
+  HeaderPagerImage({@required String url}) : this.url = url;
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      url,
+      height: 100,
+      width: MediaQuery.of(context).size.width,
+      fit: BoxFit.cover,
     );
   }
 }
