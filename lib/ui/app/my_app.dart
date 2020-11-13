@@ -1,3 +1,4 @@
+import 'package:airbnb_clone/data/PropertyDetail.dart';
 import 'package:airbnb_clone/ui/home/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(
+        propertyDetail: generatePropertyDetail(),
+      ),
     );
   }
+}
+
+PropertyDetail generatePropertyDetail() {
+  return PropertyDetail();
 }
